@@ -33,7 +33,7 @@ const actions = {
 };
 
 const mutations = {
-  setTodos: (state, leases) => (state.leases = leases),
+  setLeases: (state, leases) => (state.leases = leases),
 
 
 };
