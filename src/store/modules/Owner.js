@@ -1,15 +1,23 @@
 import axios from 'axios';
 
 const state = {
-  Owners: []
+  owners: []
 };
 
 const getters = {
-  allTodos: state => state.todos
+  allOwners: state => state.owners
 };
 
 const actions = {
   
+
+   async getOwner({commit},owner){
+
+     const response =await axio.get(`${id}`);
+
+     commit('getOwner',response.data)
+     
+   }
   
   async addOwner({ commit }, Name) {
     const response = await axios.post(
@@ -19,44 +27,35 @@ const actions = {
 
     commit('newOwner, response.data);
   },
-  async deleteTodo({ commit }, id) {
-    await axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`);
 
-    commit('removeTodo', id);
+
+  async deleteOwner({ commit }, id) {
+    await axios.delete(`${id}`);
+
+    commit('removeOwner', id);
   },
-  async filterTodos({ commit }, e) {
-    // Get selected number
-    const limit = parseInt(
-      e.target.options[e.target.options.selectedIndex].innerText
-    );
-
-    const response = await axios.get(
-      `https://jsonplaceholder.typicode.com/todos?_limit=${limit}`
-    );
-
-    commit('setTodos', response.data);
-  },
-  async updateTodo({ commit }, updTodo) {
+  
+  async updateOwner({ commit }, updateOwner) {
     const response = await axios.put(
-      `https://jsonplaceholder.typicode.com/todos/${updTodo.id}`,
-      updTodo
+      `${updateOwner.id}`,
+      updateOwner
     );
 
     console.log(response.data);
 
-    commit('updateTodo', response.data);
+    commit('updateOwner', response.data);
   }
 };
 
 const mutations = {
-  setTodos: (state, todos) => (state.todos = todos),
-  newTodo: (state, todo) => state.todos.unshift(todo),
-  removeTodo: (state, id) =>
-    (state.todos = state.todos.filter(todo => todo.id !== id)),
-  updateTodo: (state, updTodo) => {
-    const index = state.todos.findIndex(todo => todo.id === updTodo.id);
+  getOwner: (state, owner) => (state.owners = owners),
+  newOwner: (state, owners) => state.owners.unshift(todo),
+  removeOwner: (state, id) =>
+    (state.owners = state.owners.filter(owner => owner.id !== id)),
+  updateOwner: (state, updateOwner) => {
+    const index = state.owners.findIndex(owner => owner.id === updateOwner.id);
     if (index !== -1) {
-      state.todos.splice(index, 1, updTodo);
+      state.owners.splice(index, 1, updateOwner);
     }
   }
 };
